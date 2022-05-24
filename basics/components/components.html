@@ -8,14 +8,9 @@
   </head>
   <body>
     <div id="app" v-cloak>
-      {{greeting}}
-      <input @keyup.enter="greet(greeting)" v-model="greeting" />
+      <login-form />
 
       <hr />
-
-      <button @click="isVisible = !isVisible">Toggle Box</button>
-      <div v-if="isVisible" class="box"></div>
-      <button @click="toggleBox">Toggle Box</button>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -34,6 +29,29 @@
             console.log(greeting);
           }
         }
+      });
+
+      app.component('login-form', {
+        template: `
+        <form @submit.prevent="handleSubmit">
+            <h1> {{title}}</h1>
+            <input type="email" v-model="email"/>
+            <input type="password" v-model="password"/>
+            <button>Submit</button>
+        </form>      
+          `, 
+          data() {
+              return {
+                  title: 'Login Form',
+                  email: '',
+                  password: ''
+              }
+          },
+          methods: {
+              handleSubmit() {
+                  console.log(this.email, this.password) 
+              }
+          }
       });
       app.mount('#app');
     </script>
