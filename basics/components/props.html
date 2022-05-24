@@ -35,8 +35,8 @@
         template: `
         <form @submit.prevent="handleSubmit">
             <h1> {{title}}</h1>
-            <custom-input type="email"/>
-            <custom-input type="password" :label="emailLabel"/>
+            <custom-input v-model="email" :label="emailLabel"/>
+            <custom-input v-model="password" :label="passwordLabel"/>
             <button>Submit</button>
         </form>      
           `,
@@ -60,10 +60,25 @@
         template: `
         <label>
             {{ label }}
-            <input type="text">
+            <input type="text" v-model="inputValue">
         </label>
           `,
-        props: ['label']
+        props: ['label'],
+        computed: {
+            inputValue: {
+                get() {
+
+                },
+                set () {
+
+                }
+            }
+        }
+        // data() {
+        //     return {
+        //         inputValue: '',
+        //     }
+        // }
       });
 
       app.mount('#app');
