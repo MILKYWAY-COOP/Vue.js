@@ -4,10 +4,21 @@ const app = Vue.createApp({
       firstName: 'John',
       lastName: 'Doe',
       email: 'john@gmail.com',
-      gender: 'Male',
-      image:
-        'https://imgs.search.brave.com/SU0X3VGsDEmbH4IFBJdcGfP3Nvaj67tIFTpN3MLyGYc/rs:fit:504:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5m/VTB1YWYwWldnZlN0/aEFKWFV5bWhnSGFH/OSZwaWQ9QXBp'
+      gender: 'male',
+      image: 'https://randomuser.me/api/portraits/men/10.jpg'
     };
+  },
+  methods: {
+    async getUser() {
+      const res = await fetch('https://randomuser.me/api');
+      const { results } = await res.json();
+      this.firstName = results[0].name.first;
+      this.lastName = results[0].name.last;
+      this.email = results[0].email;
+      this.gender = results[0].gender;
+      this.image = results[0].picture.large;
+      console.log(results);
+    }
   }
 });
 
